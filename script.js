@@ -17,13 +17,11 @@ function startGame() {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-      // Рисуем змею
       ctx.fillStyle = 'green';
       snake.forEach(segment => {
         ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
       });
   
-      // Рисуем еду
       ctx.fillStyle = 'red';
       ctx.fillRect(food.x, food.y, gridSize, gridSize);
     }
@@ -49,7 +47,6 @@ function startGame() {
   
        snake.unshift(head);
   
-      // Проверяем столкновение с едой
       if (head.x === food.x && head.y === food.y) {
           score++;
           scoreElement.textContent = `Счет: ${score}`;
@@ -65,7 +62,6 @@ function startGame() {
         x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
         y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize,
       };
-        // Проверяем, чтобы еда не попадала на змею
       while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
              food = {
                 x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
@@ -83,7 +79,6 @@ function startGame() {
             gameOver();
             return;
         }
-       // Проверяем столкновение с собственным телом
        for (let i = 1; i < snake.length; i++) {
            if (head.x === snake[i].x && head.y === snake[i].y) {
               gameOver();
